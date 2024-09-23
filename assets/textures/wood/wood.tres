@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c11ilmxk0ouij"]
+
+[ext_resource type="Texture2D" uid="uid://cbsn0wfgnd5a0" path="res://textures/wood/wood_albedo.png" id="1_vroe4"]
+[ext_resource type="Texture2D" uid="uid://b6mynypfdv8gu" path="res://textures/wood/wood_norm.png" id="2_mwhea"]
+
+[resource]
+albedo_texture = ExtResource("1_vroe4")
+normal_enabled = true
+normal_texture = ExtResource("2_mwhea")
+uv1_triplanar = true

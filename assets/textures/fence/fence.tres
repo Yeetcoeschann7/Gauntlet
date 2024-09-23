@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://so3mm0aab57m"]
+
+[ext_resource type="Texture2D" uid="uid://c36pco7j1v3jc" path="res://assets/textures/fence/fence_albedo.png" id="1_f3tf3"]
+[ext_resource type="Texture2D" uid="uid://dnvbqqbptcvqo" path="res://assets/textures/fence/fence_norm.png" id="2_e1m0g"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_f3tf3")
+normal_enabled = true
+normal_texture = ExtResource("2_e1m0g")

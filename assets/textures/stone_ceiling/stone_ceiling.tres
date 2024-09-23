@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cjt0fgirqa0gw"]
+
+[ext_resource type="Texture2D" uid="uid://dsku0c4ewwpwr" path="res://assets/textures/stone_ceiling/stone_ceiling_albedo.png" id="1_pjlh3"]
+[ext_resource type="Texture2D" uid="uid://dt7jxckgcpn6u" path="res://assets/textures/stone_ceiling/stone_ceiling_norm.png" id="2_ri6n8"]
+
+[resource]
+albedo_texture = ExtResource("1_pjlh3")
+normal_enabled = true
+normal_texture = ExtResource("2_ri6n8")
