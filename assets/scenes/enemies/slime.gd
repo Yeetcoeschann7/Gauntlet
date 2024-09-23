@@ -5,6 +5,7 @@ enum {IDLE, CHASE, SQUELCH, MOVE}
 @onready var player = get_tree().root.get_node("mainLevel/player")
 @onready var HUD = get_tree().root.get_node("mainLevel/player/Camera3D/Hud")
 @onready var TRAIL = preload("res://assets/scenes/enemies/slimeDecal.tscn")
+@onready var globs = get_tree().root.get_node("/root/Globs")
 
 const SPEED = 2
 
@@ -20,6 +21,7 @@ func _ready():
 
 func _physics_process(delta):
 	if health <= 0:
+		globs.total_slimes -= 1
 		var i = str_to_var(HUD.get_node("Score/scoreValue").text) + 100
 		HUD.get_node("Score/scoreValue").text = var_to_str(i)
 		var particles = $attackParticles
