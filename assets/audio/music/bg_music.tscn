@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhncxl1bi2hur"]
 
-[ext_resource type="AudioStream" uid="uid://cxt2bpe5j1mg6" path="res://assets/audio/music/KF.mp3" id="1_g3usx"]
+[ext_resource type="AudioStream" uid="uid://bwpvlx8m1i110" path="res://assets/audio/music/ArcadeLoop.wav" id="1_8h7nc"]
 
 [node name="BGMusic" type="AudioStreamPlayer"]
 process_mode = 3
-stream = ExtResource("1_g3usx")
+stream = ExtResource("1_8h7nc")
 autoplay = true
 bus = &"Music"

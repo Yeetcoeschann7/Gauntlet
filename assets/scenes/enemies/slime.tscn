@@ -626,7 +626,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_srqek")
 draw_pass_1 = SubResource("SphereMesh_xqvt6")
 
-[node name="dead" type="AudioStreamPlayer3D" parent="attackParticles"]
+[node name="dead" type="AudioStreamPlayer" parent="attackParticles"]
 stream = ExtResource("2_lqg2d")
 volume_db = 15.0
 pitch_scale = 0.7
@@ -653,7 +653,7 @@ autostart = true
 [node name="frontRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.287102, -0.154779)
 
-[node name="hurt" type="AudioStreamPlayer3D" parent="."]
+[node name="hurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8e2p0")
 volume_db = 3.0
 bus = &"SFX"
