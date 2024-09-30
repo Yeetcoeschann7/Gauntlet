@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh0ebp555gb85"]
+[gd_scene load_steps=4 format=3 uid="uid://dh0ebp555gb85"]
 
 [ext_resource type="Script" path="res://assets/scenes/enemies/spawner.gd" id="1_s8uxl"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_4hlrl"]
 top_radius = 5.0
 bottom_radius = 5.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2abgg"]
+radius = 5.0
+height = 28.316
 
 [node name="spawner" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.924977, 0)
@@ -15,4 +19,14 @@ script = ExtResource("1_s8uxl")
 wait_time = 5.0
 autostart = true
 
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.73027, 0)
+shape = SubResource("CapsuleShape3D_2abgg")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
