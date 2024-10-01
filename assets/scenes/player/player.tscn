@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dp3ssi32nlof3"]
+[gd_scene load_steps=17 format=3 uid="uid://dp3ssi32nlof3"]
 
 [ext_resource type="Script" path="res://assets/scripts/player/player.gd" id="1_q5c0a"]
+[ext_resource type="AudioStream" uid="uid://d1uvih7q7b6pi" path="res://assets/audio/sfx/healing.wav" id="2_a64mq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbxxw"]
 
@@ -99,7 +100,6 @@ bind/22/pose = Transform3D(7.50034e-08, -0.996321, -0.085705, -1.44017e-08, -0.0
 shading_mode = 2
 diffuse_mode = 3
 albedo_color = Color(1, 1, 0.172549, 1)
-emission_enabled = true
 emission_energy_multiplier = 2.0
 
 [sub_resource type="Animation" id="Animation_kho33"]
@@ -1304,6 +1304,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00201368, 0.168907, 0.0046
 shape = SubResource("CapsuleShape3D_eod5b")
 
 [node name="volleyTimer" type="Timer" parent="."]
+wait_time = 0.6
 one_shot = true
 autostart = true
 
@@ -1317,5 +1318,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.01298, 0)
 [node name="iframes" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="healSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_a64mq")
+volume_db = -10.0
+bus = &"SFX"
 
 [connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]

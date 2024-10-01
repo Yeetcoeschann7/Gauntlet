@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://g4j85de4fvog"]
+[gd_scene load_steps=6 format=3 uid="uid://g4j85de4fvog"]
 
 [ext_resource type="Script" path="res://assets/scenes/items/door.gd" id="1_xm8ak"]
+[ext_resource type="AudioStream" uid="uid://r4c4rpeyyuq6" path="res://assets/audio/sfx/warp.mp3" id="2_xxha2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xg31v"]
 shading_mode = 2
@@ -20,6 +21,7 @@ radius = 2.40867
 height = 7.00701
 
 [node name="Door" type="Area3D"]
+process_mode = 3
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_xm8ak")
@@ -32,4 +34,8 @@ mesh = SubResource("CylinderMesh_11oxq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97923, 0)
 shape = SubResource("CapsuleShape3D_u6m4m")
 
+[node name="warpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xxha2")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="warpSound" to="." method="_on_warp_sound_finished"]

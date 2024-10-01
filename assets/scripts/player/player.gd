@@ -1,9 +1,12 @@
 extends CharacterBody3D
 
-@export var SPEED: int = 1000
+@export var SPEED: float = 5000.0
+@export var ACCELERATION: float = 0.3
+@export var FRICTION: float = 0.15
 const JUMP_VELOCITY = 4.5
 @onready var BULLET = preload("res://assets/scenes/player/arrow.tscn")
 @onready var HUD = get_tree().root.get_child(2).get_node("player/Camera3D/Hud")
+@onready var time = get_tree().root.get_node("RandomLevel/floorTime")
 @onready var globs = get_tree().root.get_node("/root/Globs")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -35,27 +38,27 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	var look_dir = Input.get_vector("shoot_left", "shoot_right", "shoot_up", "shoot_down")
+	var look_dir = Input.get_vector("up", "down", "left", "right")
 	var look_direction = (transform.basis * Vector3(look_dir.x, 0, look_dir.y)).normalized()
 	if look_direction:
-		$Armature.rotation.y = Input.get_vector("shoot_up", "shoot_down", "shoot_left", "shoot_right").angle()
+		$Armature.rotation.y = Input.get_vector("up", "down", "left", "right").angle()
 		look_rot = $Armature.rotation.y
 	else:
 		$Armature.rotation.y = look_rot
-	if direction:
-		velocity.x = direction.x * SPEED * delta
-		velocity.z = direction.z * SPEED * delta
+	if direction and not Input.is_action_pressed("shoot"):
+		velocity.x = lerp(velocity.x, direction.x * SPEED, ACCELERATION) * delta
+		velocity.z = lerp(velocity.z, direction.z * SPEED, ACCELERATION) * delta
 		$AnimationPlayerLegs.play("Walk_Legs")
 		if (not Input.is_action_pressed("shoot")):
 			$AnimationPlayerTop.play("Walk_Arms")
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = lerp(velocity.x, 0.0, FRICTION) * delta
+		velocity.z = lerp(velocity.z, 0.0, FRICTION) * delta
 		$AnimationPlayerLegs.play("Stand_Legs")
 		if ($AnimationPlayerTop.current_animation != "Shoot"):
 			$AnimationPlayerTop.play("Stand_Arms")
-	if (Input.is_action_pressed("shoot") or look_direction) and roundsLeft <= 0 and $volleyTimer.time_left <= 0:
-		roundsLeft = 5
+	if ((Input.is_action_pressed("shoot") and look_direction) or Input.is_action_pressed("shoot")) and roundsLeft <= 0 and $volleyTimer.time_left <= 0:
+		roundsLeft = 3
 		$volleyTimer.start()
 	if roundsLeft > 0:
 		$AnimationPlayerTop.play("Shoot")
@@ -73,11 +76,11 @@ func take_damage():
 		$iframes.start()
 		
 func heal():
-	if globs.player_health <= 85:
-		globs.player_health += 15
-	else:
-		globs.player_health = 90
-	print("CURRENT HEALTH: ", health)
+	$healSound.play()
+	var newHealth = clamp(globs.player_health + 15, 0, 90)
+	var tempTime = clamp(time.time_left + 10, 0 , 30)
+	time.start(tempTime)
+	globs.player_health = newHealth
 
 func _on_shoot_timer_timeout():
 	var bullet = BULLET.instantiate()

@@ -14,19 +14,17 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var state = IDLE
 var dir = 0
 var moves_left = 0
-var health = 5
+var health = 3
 
 func _ready():
-	set_scale(Vector3(5,5,5))
+	set_scale(Vector3(3,3,3))
 	globs.total_slimes += 1
 
 func _physics_process(delta):
 	match(health):
 		0:
-			if time.time_left < 27:
-				time.start(time.time_left + 1)
-			else:
-				time.start(30)
+			var tempTime = clamp(time.time_left + 1, 0 , 30)
+			time.start(tempTime)
 			die()
 		_:
 			var collision = move_and_collide(velocity * delta)
@@ -37,9 +35,9 @@ func _physics_process(delta):
 					player.take_damage()
 					rotation.y += 180
 					moves_left = randi_range(50,100)
-				if $frontRay.is_colliding() and $frontRay.get_collider().name == "GridMap":
+				if $frontRay.is_colliding() and "GridMap" in $frontRay.get_collider().name:
 					rotation.y += delta
-					moves_left += delta
+					moves_left += 1
 			if(moves_left > 0 and $slimeAnimation.current_animation != "damaged"):
 				var angle = self.get_rotation().y
 				position += (Vector3(sin(angle),0, cos(angle)) * 10 ) * (delta * SPEED)
@@ -112,7 +110,6 @@ func _on_attack_particles_finished():
 
 func die():
 	globs.total_slimes -= 1
-	globs.score += 50
 	var particles = $attackParticles
 	$attackParticles.emitting = true
 	$attackParticles/dead.play()
