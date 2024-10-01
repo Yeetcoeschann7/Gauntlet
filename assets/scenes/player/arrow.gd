@@ -11,7 +11,7 @@ func _physics_process(delta):
 	position += (Vector3(sin(angle),0, cos(angle)) * 10 ) * (delta * SPEED)
 	
 func _on_body_entered(body):
-	if(body.name == "GridMap" or "slime" in body.name or "CharacterBody3D" in body.name):
+	if("GridMap" in body.name or "slime" in body.name or "CharacterBody3D" in body.name):
 		if "slime" in body.name or "CharacterBody3D" in body.name:
 			body.take_damage()
 		queue_free()

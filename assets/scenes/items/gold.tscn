@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://caa40f7i3naop"]
+
+[ext_resource type="Script" path="res://assets/scenes/items/gold.gd" id="1_sgkrp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltuvi"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(0.505882, 0.94902, 0.227451, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gq1fg"]
+material = SubResource("StandardMaterial3D_ltuvi")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hmxcw"]
+radius = 3.5102
+
+[node name="Gold" type="Area3D"]
+collision_layer = 9
+collision_mask = 9
+script = ExtResource("1_sgkrp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29254, 0)
+mesh = SubResource("SphereMesh_gq1fg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29254, 0)
+shape = SubResource("SphereShape3D_hmxcw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

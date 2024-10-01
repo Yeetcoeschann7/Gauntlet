@@ -1,11 +1,11 @@
 extends CharacterBody3D
 
-enum {IDLE, CHASE, SQUELCH, MOVE}
-@onready var player_pos = get_tree().root.get_node("mainLevel/player").global_position
-@onready var player = get_tree().root.get_node("mainLevel/player")
-@onready var HUD = get_tree().root.get_node("mainLevel/player/Camera3D/Hud")
-@onready var TRAIL = preload("res://assets/scenes/enemies/slimeDecal.tscn")
+enum {IDLE, CHASE, CHASE2, CHASE3, SQUELCH, MOVE}
+@onready var player_pos = get_tree().root.get_node("RandomLevel/player").global_position
+@onready var player = get_tree().root.get_node("RandomLevel/player")
+@onready var HUD = get_tree().root.get_node("RandomLevel/player/Camera3D/Hud")
 @onready var globs = get_tree().root.get_node("/root/Globs")
+@onready var time = get_tree().root.get_node("RandomLevel/floorTime")
 
 const SPEED = 2
 
@@ -23,6 +23,10 @@ func _ready():
 func _physics_process(delta):
 	match(health):
 		0:
+			if time.time_left < 27:
+				time.start(time.time_left + 1)
+			else:
+				time.start(30)
 			die()
 		_:
 			var collision = move_and_collide(velocity * delta)
@@ -50,7 +54,6 @@ func _physics_process(delta):
 func _on_act_timer_timeout():
 	state = randi_range(IDLE,MOVE)
 	if abs(global_position - player_pos) < Vector3(20,0,20):
-		state = CHASE
 		$actTimer.wait_time = 0.5
 	
 	match state:
@@ -60,7 +63,19 @@ func _on_act_timer_timeout():
 				$actTimer.start()
 		CHASE:
 			#print("CHASE")
-			player_pos = get_tree().root.get_node("mainLevel/player").global_position
+			player_pos = get_tree().root.get_node("RandomLevel/player").global_position
+			look_at(player_pos)
+			self.rotate_object_local(Vector3.UP, PI)
+			moves_left = randi_range(50,200)
+		CHASE2:
+			#print("CHASE")
+			player_pos = get_tree().root.get_node("RandomLevel/player").global_position
+			look_at(player_pos)
+			self.rotate_object_local(Vector3.UP, PI)
+			moves_left = randi_range(50,200)
+		CHASE3: 
+			#print("CHASE")
+			player_pos = get_tree().root.get_node("RandomLevel/player").global_position
 			look_at(player_pos)
 			self.rotate_object_local(Vector3.UP, PI)
 			moves_left = randi_range(50,200)
@@ -77,13 +92,12 @@ func _on_act_timer_timeout():
 			moves_left = randi_range(50,200)
 		_:
 			print("PASS")
-			pass
 			
 func take_damage():
 	$hurt.play()
 	$slimeAnimation.play("damaged")
 	health -= 1
-	pass
+	state = CHASE
 
 func _on_slime_animation_animation_finished(anim_name):
 	if(anim_name == "attack"):
@@ -98,8 +112,7 @@ func _on_attack_particles_finished():
 
 func die():
 	globs.total_slimes -= 1
-	var i = str_to_var(HUD.get_node("Score/scoreValue").text) + 100
-	HUD.get_node("Score/scoreValue").text = var_to_str(i)
+	globs.score += 50
 	var particles = $attackParticles
 	$attackParticles.emitting = true
 	$attackParticles/dead.play()

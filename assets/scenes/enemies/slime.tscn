@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://m4xgngucg0wu"]
+[gd_scene load_steps=31 format=3 uid="uid://m4xgngucg0wu"]
 
 [ext_resource type="Script" path="res://assets/scenes/enemies/slime.gd" id="1_1x83l"]
 [ext_resource type="AudioStream" uid="uid://bux8y2r2g77v6" path="res://assets/audio/sfx/splat_dead.wav" id="2_lqg2d"]
@@ -8,12 +8,9 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_his72"]
 resource_local_to_scene = true
 transparency = 1
-blend_mode = 3
-cull_mode = 2
-diffuse_mode = 3
+shading_mode = 2
 albedo_color = Color(0.0745098, 0.380392, 0, 1)
-roughness = 0.14
-emission_enabled = true
+roughness = 0.5
 emission = Color(0.796078, 1, 0.776471, 1)
 emission_energy_multiplier = 0.5
 
@@ -56,6 +53,15 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i40wl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3cpn"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 2
+albedo_color = Color(0.133333, 0.572549, 0, 0.337255)
+emission_enabled = true
+emission = Color(0, 0.423529, 0.00392157, 1)
+emission_energy_multiplier = 0.7
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ad3q"]
 resource_name = "Slime"
@@ -143,11 +149,10 @@ shadow_mesh = SubResource("ArrayMesh_i5fo6")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyfmm"]
 render_priority = 1
 transparency = 4
-blend_mode = 1
 cull_mode = 1
 depth_draw_mode = 1
-diffuse_mode = 3
-specular_mode = 1
+shading_mode = 2
+specular_mode = 2
 albedo_color = Color(1, 0, 0, 1)
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
@@ -596,7 +601,7 @@ skeleton = NodePath("")
 
 [node name="slimeBodyInner" type="MeshInstance3D" parent="slimeBody"]
 transform = Transform3D(0.882016, 0, 0, 0, 0.717652, 0, 0, 0, 0.882016, 0, 0.108046, 0)
-material_override = SubResource("StandardMaterial3D_his72")
+material_override = SubResource("StandardMaterial3D_f3cpn")
 mesh = SubResource("ArrayMesh_0ymnp")
 skeleton = NodePath("")
 
@@ -660,6 +665,7 @@ bus = &"SFX"
 
 [node name="squelch" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_5eep0")
+attenuation_model = 2
 bus = &"SFX"
 
 [connection signal="finished" from="attackParticles" to="." method="_on_attack_particles_finished"]
