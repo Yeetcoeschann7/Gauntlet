@@ -45,7 +45,7 @@ func _ready():
 		var doSpawner = randi_range(0,500)
 		var doGold = randi_range(0,500)
 		var doFood = randi_range(0,500)
-		if doSpawner <= j/10 and spawner_count < 8 and not i >= grid_steps:
+		if doSpawner <= j/10 and spawner_count < 8 and not i >= grid_steps - 1:
 			var spawner = SPAWNER.instantiate()
 			get_tree().root.get_node("RandomLevel").add_child(spawner)
 			spawner.global_position = Vector3((current_pos.x * 10) + 5, 0, (current_pos.y * 10) + 5)
@@ -66,6 +66,8 @@ func _ready():
 	var door = DOOR.instantiate()
 	get_tree().root.get_node("RandomLevel").add_child(door)
 	door.global_position = Vector3((current_pos.x * 10) + 5, 0, (current_pos.y * 10) + 5)
+	$GridMap.set_cell_item(Vector3i(current_pos.x,0,current_pos.y), 5, 0)
+	$GridMap.set_cell_item(Vector3i(current_pos.x,-1,current_pos.y), 5, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

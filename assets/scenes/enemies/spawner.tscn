@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dh0ebp555gb85"]
+[gd_scene load_steps=13 format=3 uid="uid://dh0ebp555gb85"]
 
 [ext_resource type="Script" path="res://assets/scenes/enemies/spawner.gd" id="1_s8uxl"]
 [ext_resource type="AudioStream" uid="uid://cf4ssflucmpom" path="res://assets/audio/sfx/spawnerHit.wav" id="2_ip3bp"]
 [ext_resource type="AudioStream" uid="uid://bo342qdxs6qh1" path="res://assets/audio/sfx/spawnerCrumble.wav" id="3_uoytt"]
+[ext_resource type="Texture2D" uid="uid://cqmmf4aotsq14" path="res://assets/textures/spawner.png" id="4_6hbpw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_op2o5"]
 resource_local_to_scene = true
@@ -106,6 +107,14 @@ _data = {
 "damage": SubResource("Animation_1oj2e")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vo6bb"]
+transparency = 1
+albedo_texture = ExtResource("4_6hbpw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bo3dq"]
+material = SubResource("StandardMaterial3D_vo6bb")
+size = Vector2(8, 9)
+
 [node name="spawner" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.924977, 0)
 mesh = SubResource("CylinderMesh_4hlrl")
@@ -136,6 +145,10 @@ bus = &"SFX"
 stream = ExtResource("3_uoytt")
 pitch_scale = 0.6
 bus = &"SFX"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37498, 0)
+mesh = SubResource("PlaneMesh_bo3dq")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

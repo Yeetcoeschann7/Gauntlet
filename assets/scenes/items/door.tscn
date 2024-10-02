@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://g4j85de4fvog"]
+[gd_scene load_steps=7 format=3 uid="uid://g4j85de4fvog"]
 
 [ext_resource type="Script" path="res://assets/scenes/items/door.gd" id="1_xm8ak"]
 [ext_resource type="AudioStream" uid="uid://r4c4rpeyyuq6" path="res://assets/audio/sfx/warp.mp3" id="2_xxha2"]
@@ -12,12 +12,16 @@ emission = Color(0.054902, 1, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_11oxq"]
 material = SubResource("StandardMaterial3D_xg31v")
-top_radius = 2.0
-bottom_radius = 2.0
-height = 1.0
+top_radius = 0.3
+bottom_radius = 0.3
+height = 3.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_4u5e6"]
+material = SubResource("StandardMaterial3D_xg31v")
+size = Vector3(1.5, 1, 0.7)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6m4m"]
-radius = 2.40867
+radius = 1.68842
 height = 7.00701
 
 [node name="Door" type="Area3D"]
@@ -27,8 +31,12 @@ collision_mask = 9
 script = ExtResource("1_xm8ak")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13206, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.69365, 0)
 mesh = SubResource("CylinderMesh_11oxq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -1.95118, 0)
+mesh = SubResource("PrismMesh_4u5e6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97923, 0)

@@ -14,3 +14,6 @@ func _on_body_entered(body):
 		remove_child(goldSound)
 		get_parent().add_child(goldSound)
 		call_deferred("queue_free")
+		
+func _process(delta):
+	$MeshInstance3D.rotation_degrees.z += delta * 150

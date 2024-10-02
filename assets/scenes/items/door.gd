@@ -17,3 +17,6 @@ func _on_warp_sound_finished():
 	globs.floor_num += 1
 	globs.score -= 1000
 	get_tree().change_scene_to_file("res://assets/scenes/levels/randomLevel.tscn")
+
+func _process(delta):
+	$MeshInstance3D.rotation_degrees.y += delta * 150

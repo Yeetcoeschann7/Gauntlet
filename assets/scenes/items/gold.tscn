@@ -3,27 +3,33 @@
 [ext_resource type="Script" path="res://assets/scenes/items/gold.gd" id="1_sgkrp"]
 [ext_resource type="AudioStream" uid="uid://twcsnjtxu3vt" path="res://assets/audio/sfx/gotCoin.wav" id="2_asf5t"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltuvi"]
-albedo_color = Color(1, 1, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uuea6"]
+shading_mode = 2
+diffuse_mode = 3
+albedo_color = Color(1, 0.843137, 0.152941, 1)
+metallic = 1.0
+roughness = 0.48
 emission_enabled = true
-emission = Color(0.505882, 0.94902, 0.227451, 1)
+emission = Color(0.301961, 0.247059, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_gq1fg"]
-material = SubResource("StandardMaterial3D_ltuvi")
-radius = 2.0
-height = 4.0
+[sub_resource type="CylinderMesh" id="CylinderMesh_usjch"]
+material = SubResource("StandardMaterial3D_uuea6")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hmxcw"]
 radius = 3.5102
 
 [node name="Gold" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65885, 0)
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_sgkrp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29254, 0)
-mesh = SubResource("SphereMesh_gq1fg")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.50348, 0)
+mesh = SubResource("CylinderMesh_usjch")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29254, 0)
