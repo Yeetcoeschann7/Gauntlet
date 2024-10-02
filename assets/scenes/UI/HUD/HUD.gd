@@ -2,6 +2,8 @@ extends Control
 
 @onready var globs = get_tree().root.get_node("/root/Globs")
 var dead = false
+enum {SEVEN_TWENTY, NINE_HUNDRED, TEN_EIGHTY}
+var resolution = SEVEN_TWENTY
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +28,7 @@ func _process(_delta):
 		$pause/Score.visible = false
 		$pause/resume.visible = true
 		get_tree().paused = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		$pause/resume.grab_focus()
 		
 func game_over():
@@ -36,6 +39,7 @@ func game_over():
 	$gameOver/Score.visible = true
 	$gameOver/retry.visible = true
 	get_tree().paused = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	globs.save()
 	$gameOver/retry.grab_focus()
 
@@ -45,6 +49,7 @@ func _on_quit_pressed():
 func _on_resume_pressed():
 	get_tree().paused = false
 	$pause.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _on_retry_pressed():
 	get_tree().paused = false
@@ -53,4 +58,8 @@ func _on_retry_pressed():
 	globs.player_health = 90
 	globs.score = 0
 	globs.floor_num = 0
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().change_scene_to_file("res://assets/scenes/levels/randomLevel.tscn")
+	
+func _on_h_slider_value_changed(value):
+	get_viewport().set_scaling_3d_scale(value)
