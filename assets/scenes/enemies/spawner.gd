@@ -9,6 +9,7 @@ var health = 9
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	spawn()
 
 func _on_timer_timeout():
 	spawn()

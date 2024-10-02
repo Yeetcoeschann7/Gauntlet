@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b45ou6xhok3e4"]
+[gd_scene load_steps=56 format=3 uid="uid://b45ou6xhok3e4"]
 
 [ext_resource type="PackedScene" uid="uid://m4xgngucg0wu" path="res://assets/scenes/enemies/slime.tscn" id="1_igqp1"]
 [ext_resource type="PackedScene" uid="uid://dp3ssi32nlof3" path="res://assets/scenes/player/player.tscn" id="2_1nj54"]
@@ -276,6 +276,71 @@ item/8/navigation_layers = 1
 item/8/preview = SubResource("ImageTexture_s4q0p")
 metadata/_editor_source_scene = "res://assets/scenes/levels/cube.tscn"
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqq6f"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.733333, 0, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xshhi"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_sqq6f")
+top_radius = 5.0
+bottom_radius = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7eb7r"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.733333, 0, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gtr52"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_7eb7r")
+top_radius = 5.0
+bottom_radius = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y365k"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.733333, 0, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y6arr"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_y365k")
+top_radius = 5.0
+bottom_radius = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37e8o"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.733333, 0, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kxeo1"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_37e8o")
+top_radius = 5.0
+bottom_radius = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_228nx"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.733333, 0, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_op5f0"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_228nx")
+top_radius = 5.0
+bottom_radius = 5.0
+
 [node name="mainLevel" type="Node3D"]
 
 [node name="slime2" parent="." instance=ExtResource("1_igqp1")]
@@ -347,15 +412,20 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="spawner" parent="." instance=ExtResource("8_2x1qv")]
+mesh = SubResource("CylinderMesh_xshhi")
 
 [node name="spawner2" parent="." instance=ExtResource("8_2x1qv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.2758, -0.924977, 71.4108)
+mesh = SubResource("CylinderMesh_gtr52")
 
 [node name="spawner3" parent="." instance=ExtResource("8_2x1qv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105.041, -0.924977, 74.8281)
+mesh = SubResource("CylinderMesh_y6arr")
 
 [node name="spawner4" parent="." instance=ExtResource("8_2x1qv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.35, -0.924977, -74.835)
+mesh = SubResource("CylinderMesh_kxeo1")
 
 [node name="spawner5" parent="." instance=ExtResource("8_2x1qv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.5266, -0.924977, -74.835)
+mesh = SubResource("CylinderMesh_op5f0")
