@@ -33,7 +33,6 @@ func loadSave():
 	if not FileAccess.file_exists("user://savegame.save"):
 		return
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
-	var json = JSON.new()
 	var json_string = save_file.get_line()
-	var save_dict = json.parse_string(json_string)
+	var save_dict = JSON.parse_string(json_string)
 	highscore = save_dict["highscore"]

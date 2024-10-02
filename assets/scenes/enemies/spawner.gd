@@ -38,7 +38,7 @@ func take_damage():
 		$hitSound.play()
 	$AnimationPlayer.play("damage")
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	if health <= 0:
 		globs.score += 100
 		var tempTime = clamp(time.time_left + 2, 0 , 30)

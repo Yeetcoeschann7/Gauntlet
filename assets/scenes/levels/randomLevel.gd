@@ -21,9 +21,9 @@ func _ready():
 	var current_dir = Vector2.RIGHT
 	$GridMap.set_cell_item(Vector3i(0,0,0), 5, 0)
 	var last_dir = current_dir * -1
-	var j = 0
-	var k = 0
-	var l = 0
+	var j = 0.0
+	var k = 0.0
+	var l = 0.0
 	
 	for i in range (0, grid_steps):
 		j += 1

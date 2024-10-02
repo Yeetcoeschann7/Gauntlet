@@ -27,6 +27,7 @@ func _physics_process(delta):
 			time.start(tempTime)
 			die()
 		_:
+			rotation_degrees.x = 0
 			var collision = move_and_collide(velocity * delta)
 			if not is_on_floor():
 				velocity.y -= gravity * delta
