@@ -39,6 +39,8 @@ func _process(_delta):
 		get_tree().paused = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		$pause/resume.grab_focus()
+	if $pause.visible and Input.is_action_just_pressed("ui_cancel"):
+		resume()
 		
 func game_over():
 	effect.cutoff_hz = MUFFLED_CUTOFF
@@ -53,9 +55,17 @@ func game_over():
 	$gameOver/retry.grab_focus()
 
 func _on_quit_pressed():
-	get_tree().quit()
+	get_tree().paused = false
+	globs.total_slimes = 0
+	globs.player_health = 90
+	globs.score = 0
+	globs.floor_num = 0
+	get_tree().change_scene_to_file("res://assets/scenes/UI/Menus/main_menu.tscn")
 
 func _on_resume_pressed():
+	resume()
+	
+func resume():
 	effect.cutoff_hz = NORM_CUTOFF
 	effect.resonance = NORM_RES
 	get_tree().paused = false
@@ -73,6 +83,3 @@ func _on_retry_pressed():
 	globs.floor_num = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().change_scene_to_file("res://assets/scenes/levels/randomLevel.tscn")
-	
-func _on_h_slider_value_changed(value):
-	get_viewport().set_scaling_3d_scale(value)

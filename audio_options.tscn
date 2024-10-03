@@ -1,0 +1,154 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjscin552sf3u"]
+
+[ext_resource type="Theme" uid="uid://bxoi1y650aifq" path="res://assets/fonts/VCR_Font.tres" id="1_r8gkg"]
+[ext_resource type="Script" path="res://audio_options.gd" id="2_nr2sr"]
+[ext_resource type="FontFile" uid="uid://d2bbxntdujpjf" path="res://assets/fonts/Ancient Modern Tales.otf" id="2_oxrxt"]
+[ext_resource type="AudioStream" uid="uid://bmvuhugrw8hd6" path="res://assets/audio/sfx/splat_hurt.mp3" id="4_8et0x"]
+[ext_resource type="Script" path="res://h_slider_plus.gd" id="4_h25c5"]
+[ext_resource type="Script" path="res://buttonPlus.gd" id="4_wtkbl"]
+
+[node name="audio_options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r8gkg")
+script = ExtResource("2_nr2sr")
+
+[node name="menuBG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[node name="Title" type="Label" parent="menuBG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -418.0
+offset_top = -511.0
+offset_right = 418.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_oxrxt")
+theme_override_font_sizes/font_size = 300
+text = "Audio"
+horizontal_alignment = 1
+
+[node name="menuContainer" type="GridContainer" parent="menuBG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -593.0
+offset_top = -122.0
+offset_right = 594.0
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="masterLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Master:"
+horizontal_alignment = 2
+
+[node name="masterSlider" type="HSlider" parent="menuBG/menuContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 5.0
+step = 0.1
+script = ExtResource("4_h25c5")
+
+[node name="musicLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Music:"
+horizontal_alignment = 2
+
+[node name="musicSlider" type="HSlider" parent="menuBG/menuContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 5.0
+step = 0.1
+script = ExtResource("4_h25c5")
+
+[node name="SFXLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Sound Effects:"
+horizontal_alignment = 2
+
+[node name="SFXSlider" type="HSlider" parent="menuBG/menuContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 5.0
+step = 0.1
+value = 5.0
+script = ExtResource("4_h25c5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menuBG"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -267.0
+offset_top = -121.0
+offset_right = 268.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
+
+[node name="backButton" type="Button" parent="menuBG/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Main Menu"
+script = ExtResource("4_wtkbl")
+
+[node name="saveButton" type="Button" parent="menuBG/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Save"
+script = ExtResource("4_wtkbl")
+
+[node name="defaultsButton" type="Button" parent="menuBG/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Defaults"
+script = ExtResource("4_wtkbl")
+
+[node name="testNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8et0x")
+bus = &"SFX"
+
+[connection signal="value_changed" from="menuBG/menuContainer/masterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="menuBG/menuContainer/musicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="menuBG/menuContainer/SFXSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="drag_started" from="menuBG/menuContainer/SFXSlider" to="." method="_on_sfx_slider_drag_started"]
+[connection signal="value_changed" from="menuBG/menuContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="menuBG/HBoxContainer/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="menuBG/HBoxContainer/saveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="menuBG/HBoxContainer/defaultsButton" to="." method="_on_defaults_button_pressed"]

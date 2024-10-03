@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxxthvoifbby0"]
+[gd_scene load_steps=6 format=3 uid="uid://dxxthvoifbby0"]
 
 [ext_resource type="Script" path="res://assets/scenes/UI/HUD/HUD.gd" id="1_kugdh"]
-[ext_resource type="Theme" uid="uid://bxoi1y650aifq" path="res://VCR_Font.tres" id="1_t01vy"]
+[ext_resource type="Theme" uid="uid://bxoi1y650aifq" path="res://assets/fonts/VCR_Font.tres" id="1_t01vy"]
+[ext_resource type="Script" path="res://buttonPlus.gd" id="3_ny28w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcxx7"]
 bg_color = Color(0.294118, 0, 0, 1)
@@ -179,6 +180,7 @@ focus_neighbor_right = NodePath("../quit")
 focus_next = NodePath("../quit")
 theme_override_font_sizes/font_size = 100
 text = " Try Again "
+script = ExtResource("3_ny28w")
 
 [node name="quit" type="Button" parent="gameOver"]
 process_mode = 3
@@ -196,7 +198,8 @@ grow_horizontal = 2
 grow_vertical = 0
 focus_previous = NodePath("../retry")
 theme_override_font_sizes/font_size = 100
-text = " Quit Game "
+text = " Main Menu "
+script = ExtResource("3_ny28w")
 
 [node name="pause" type="ColorRect" parent="."]
 layout_mode = 1
@@ -238,6 +241,7 @@ focus_neighbor_right = NodePath("../quit")
 focus_next = NodePath("../quit")
 theme_override_font_sizes/font_size = 100
 text = " Resume "
+script = ExtResource("3_ny28w")
 
 [node name="quit" type="Button" parent="pause"]
 process_mode = 3
@@ -255,39 +259,10 @@ grow_horizontal = 2
 grow_vertical = 0
 focus_neighbor_left = NodePath("../resume")
 theme_override_font_sizes/font_size = 100
-text = " Quit Game "
-
-[node name="HSlider" type="HSlider" parent="pause"]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -494.0
-offset_top = 137.0
-offset_right = 495.0
-offset_bottom = 271.0
-grow_horizontal = 2
-grow_vertical = 2
-max_value = 2.0
-step = 0.1
-value = 1.0
-tick_count = 5
-
-[node name="Label" type="Label" parent="pause/HSlider"]
-layout_mode = 0
-offset_left = -247.761
-offset_top = 30.7089
-offset_right = 11.2388
-offset_bottom = 99.7089
-theme_override_font_sizes/font_size = 50
-text = "Quality:"
+text = " Main Menu"
+script = ExtResource("3_ny28w")
 
 [connection signal="pressed" from="gameOver/retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="gameOver/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="pause/resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="pause/quit" to="." method="_on_quit_pressed"]
-[connection signal="drag_ended" from="pause/HSlider" to="." method="_on_h_slider_drag_ended"]
-[connection signal="value_changed" from="pause/HSlider" to="." method="_on_h_slider_value_changed"]

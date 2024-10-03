@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bxoi1y650aifq"]
+
+[ext_resource type="FontFile" uid="uid://bqq1tw6bbe7u3" path="res://assets/fonts/VCR_OSD_MONO.ttf" id="1_barlg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlj4q"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+
+[resource]
+default_font = ExtResource("1_barlg")
+Button/styles/hover = SubResource("StyleBoxFlat_qlj4q")
+Button/styles/normal = SubResource("StyleBoxFlat_qlj4q")

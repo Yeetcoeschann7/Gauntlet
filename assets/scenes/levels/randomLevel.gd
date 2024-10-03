@@ -1,6 +1,7 @@
 extends Node3D
 
 const dir = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
+@onready var globs = get_tree().root.get_node("/root/Globs")
 @onready var SPAWNER = preload("res://assets/scenes/enemies/spawner.tscn")
 @onready var FOOD = preload("res://assets/scenes/items/food.tscn")
 @onready var GOLD = preload("res://assets/scenes/items/gold.tscn")
@@ -16,6 +17,12 @@ var doAlarm = true
 var usedPositions = [Vector2(0,0)]
 
 func _ready():
+	get_viewport().set_scaling_3d_scale(globs.resScale)
+	$player/Camera3D.environment.set_adjustment_brightness(globs.brightScale)
+	$player/Camera3D.environment.set_adjustment_contrast(globs.contrastScale)
+	$player/Camera3D.environment.set_adjustment_saturation(globs.saturationScale)
+	$DirectionalLight3D.shadow_enabled = globs.shadows
+	DisplayServer.window_set_mode(globs.screenMode)
 	randomize()
 	var current_pos = Vector2(0,0)
 	

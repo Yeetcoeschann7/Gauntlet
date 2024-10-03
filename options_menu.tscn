@@ -1,0 +1,231 @@
+[gd_scene load_steps=9 format=3 uid="uid://hedyd0la75al"]
+
+[ext_resource type="FontFile" uid="uid://d2bbxntdujpjf" path="res://assets/fonts/Ancient Modern Tales.otf" id="1_2ke2b"]
+[ext_resource type="Theme" uid="uid://bxoi1y650aifq" path="res://assets/fonts/VCR_Font.tres" id="1_a5kha"]
+[ext_resource type="Script" path="res://options_menu.gd" id="2_kmcc5"]
+[ext_resource type="Script" path="res://h_slider_plus.gd" id="4_aq365"]
+[ext_resource type="PackedScene" uid="uid://1tk4ioow4jwj" path="res://resTest.tscn" id="4_og2de"]
+[ext_resource type="Script" path="res://buttonPlus.gd" id="4_st5sf"]
+[ext_resource type="Script" path="res://check_box_plus.gd" id="5_n0tcp"]
+[ext_resource type="Script" path="res://option_button_plus.gd" id="5_uvtem"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_a5kha")
+script = ExtResource("2_kmcc5")
+
+[node name="menuBG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[node name="Title" type="Label" parent="menuBG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -418.0
+offset_top = -511.0
+offset_right = 418.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2ke2b")
+theme_override_font_sizes/font_size = 300
+text = "Graphics"
+horizontal_alignment = 1
+
+[node name="menuContainer" type="GridContainer" parent="menuBG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -854.0
+offset_top = -116.0
+offset_right = 333.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="resLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Resolution Scale:"
+horizontal_alignment = 2
+
+[node name="ResSlider" type="HSlider" parent="menuBG/menuContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 2.0
+step = 0.1
+value = 1.0
+tick_count = 5
+script = ExtResource("4_aq365")
+
+[node name="brightnessLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Brightness:"
+horizontal_alignment = 2
+
+[node name="brightnessSlider" type="HSlider" parent="menuBG/menuContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 5.1
+step = 0.1
+value = 1.1
+tick_count = 6
+script = ExtResource("4_aq365")
+
+[node name="contrastLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Contrast:"
+horizontal_alignment = 2
+
+[node name="contrastSlider" type="HSlider" parent="menuBG/menuContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 5.1
+step = 0.1
+value = 1.1
+tick_count = 6
+script = ExtResource("4_aq365")
+
+[node name="saturationLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Saturation:"
+horizontal_alignment = 2
+
+[node name="saturationSlider" type="HSlider" parent="menuBG/menuContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 5.1
+step = 0.1
+value = 1.1
+tick_count = 6
+script = ExtResource("4_aq365")
+
+[node name="screenLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Screen Mode:"
+horizontal_alignment = 2
+
+[node name="screenDropdown" type="OptionButton" parent="menuBG/menuContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Maximized"
+popup/item_1/text = "Exlusive Fullscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 2
+script = ExtResource("5_uvtem")
+
+[node name="shadowLabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Shadows:"
+horizontal_alignment = 2
+
+[node name="shadowBox" type="CheckBox" parent="menuBG/menuContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+button_pressed = true
+script = ExtResource("5_n0tcp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menuBG"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -267.0
+offset_top = -121.0
+offset_right = 268.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
+
+[node name="backButton" type="Button" parent="menuBG/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Main Menu"
+script = ExtResource("4_st5sf")
+
+[node name="saveButton" type="Button" parent="menuBG/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Save"
+script = ExtResource("4_st5sf")
+
+[node name="defaultsButton" type="Button" parent="menuBG/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Defaults"
+script = ExtResource("4_st5sf")
+
+[node name="previewLabel" type="Label" parent="menuBG"]
+layout_mode = 2
+offset_left = 1426.0
+offset_top = 390.0
+offset_right = 1631.0
+offset_bottom = 434.0
+theme_override_font_sizes/font_size = 50
+text = "Preview"
+
+[node name="previewContainer" type="SubViewportContainer" parent="menuBG"]
+layout_mode = 0
+offset_left = 1324.0
+offset_top = 442.0
+offset_right = 1730.0
+offset_bottom = 810.0
+stretch = true
+
+[node name="previewViewport" type="SubViewport" parent="menuBG/previewContainer"]
+handle_input_locally = false
+size = Vector2i(406, 368)
+render_target_update_mode = 4
+
+[node name="Node3D" parent="menuBG/previewContainer/previewViewport" instance=ExtResource("4_og2de")]
+
+[connection signal="value_changed" from="menuBG/menuContainer/ResSlider" to="." method="_on_res_slider_value_changed"]
+[connection signal="value_changed" from="menuBG/menuContainer/brightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="menuBG/menuContainer/contrastSlider" to="." method="_on_contrast_slider_value_changed"]
+[connection signal="value_changed" from="menuBG/menuContainer/saturationSlider" to="." method="_on_saturation_slider_value_changed"]
+[connection signal="item_selected" from="menuBG/menuContainer/screenDropdown" to="." method="_on_screen_dropdown_item_selected"]
+[connection signal="toggled" from="menuBG/menuContainer/shadowBox" to="." method="_on_shadow_box_toggled"]
+[connection signal="pressed" from="menuBG/HBoxContainer/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="menuBG/HBoxContainer/saveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="menuBG/HBoxContainer/defaultsButton" to="." method="_on_defaults_button_pressed"]
