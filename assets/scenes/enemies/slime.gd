@@ -29,7 +29,7 @@ func _physics_process(delta):
 		_:
 			rotation_degrees.x = 0
 			var collision = move_and_collide(velocity * delta)
-			if not is_on_floor():
+			if not is_on_floor() and position.y > 0:
 				velocity.y -= gravity * delta
 			if(collision):
 				if collision.get_collider().name == "player":

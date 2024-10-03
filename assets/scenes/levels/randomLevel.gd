@@ -13,6 +13,7 @@ var spawner_count = 0
 var food_count = 0
 var gold_count = 0
 var doAlarm = true
+var usedPositions = [Vector2(0,0)]
 
 func _ready():
 	randomize()
@@ -45,23 +46,26 @@ func _ready():
 		var doSpawner = randi_range(0,500)
 		var doGold = randi_range(0,500)
 		var doFood = randi_range(0,500)
-		if doSpawner <= j/10 and spawner_count < 8 and not i >= grid_steps - 1:
+		if doSpawner <= j/10 and spawner_count < 8 and not i >= grid_steps - 1 and not Vector2(current_pos.x, current_pos.y) in usedPositions:
 			var spawner = SPAWNER.instantiate()
 			get_tree().root.get_node("RandomLevel").add_child(spawner)
 			spawner.global_position = Vector3((current_pos.x * 10) + 5, 0, (current_pos.y * 10) + 5)
 			spawner_count += 1
+			usedPositions.append(Vector2(current_pos.x, current_pos.y))
 			j = 0
-		elif doGold < k/10 and gold_count < 10:
+		elif doGold < k/10 and gold_count < 10 and not Vector2(current_pos.x, current_pos.y) in usedPositions:
 			var gold = GOLD.instantiate()
 			get_tree().root.get_node("RandomLevel").add_child(gold)
 			gold.global_position = Vector3((current_pos.x * 10) + 5, 0, (current_pos.y * 10) + 5)
 			gold_count += 1
+			usedPositions.append(Vector2(current_pos.x, current_pos.y))
 			k = 0
-		elif doFood < l/50 and food_count < 2:
+		elif doFood < l/50 and food_count < 1 and not Vector2(current_pos.x, current_pos.y) in usedPositions:
 			var food = FOOD.instantiate()
 			get_tree().root.get_node("RandomLevel").add_child(food)
 			food.global_position = Vector3((current_pos.x * 10) + 5, 0, (current_pos.y * 10) + 5)
 			food_count += 1
+			usedPositions.append(Vector2(current_pos.x, current_pos.y))
 			l = 0
 	var door = DOOR.instantiate()
 	get_tree().root.get_node("RandomLevel").add_child(door)
