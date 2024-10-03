@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bxoi1y650aifq"]
+
+[ext_resource type="FontFile" uid="uid://bqq1tw6bbe7u3" path="res://assets/fonts/VCR_OSD_MONO.ttf" id="1_4xjo1"]
+
+[resource]
+default_font = ExtResource("1_4xjo1")
