@@ -13,17 +13,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$healthBar.value = globs.player_health
-	$hiScore/hiScoreValue.text = var_to_str(int(globs.highscore))
-	$Score/scoreValue.text = var_to_str(globs.score)
+	$ColorRect/healthBar.value = globs.player_health
+	$ColorRect/hiScore/hiScoreValue.text = var_to_str(int(globs.highscore))
+	$ColorRect/Score/scoreValue.text = var_to_str(globs.score)
 	if get_tree().paused != true:
-		$Timer/timeLeft.text = var_to_str(roundi(get_tree().root.get_node("RandomLevel/floorTime").time_left))
+		$ColorRect/Timer/timeLeft.text = var_to_str(roundi(get_tree().root.get_node("RandomLevel/floorTime").time_left))
 		if roundi(get_tree().root.get_node("RandomLevel/floorTime").time_left) <= 10:
-			$Timer/timeLeft.set("theme_override_colors/font_color", Color(1,0,0))
+			$ColorRect/Timer/timeLeft.set("theme_override_colors/font_color", Color(1,0,0))
 		else:
-			$Timer/timeLeft.set("theme_override_colors/font_color", Color(1,1,1))
+			$ColorRect/Timer/timeLeft.set("theme_override_colors/font_color", Color(1,1,1))
 	if Input.is_action_just_pressed("pause") and $gameOver.visible == false and get_tree().paused == false:
-		$pause/Score/scoreValue.text = $Score/scoreValue.text
+		$pause/Score/scoreValue.text = $ColorRect/Score/scoreValue.text
 		$pause.visible = true
 		$pause/Score.visible = false
 		$pause/resume.visible = true
