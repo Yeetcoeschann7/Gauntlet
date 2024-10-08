@@ -74,6 +74,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 5.0
 step = 0.1
+value = 1.0
 script = ExtResource("4_h25c5")
 
 [node name="musicLabel" type="Label" parent="menuBG/menuContainer"]
@@ -89,6 +90,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 5.0
 step = 0.1
+value = 1.0
 script = ExtResource("4_h25c5")
 
 [node name="SFXLabel" type="Label" parent="menuBG/menuContainer"]
@@ -104,7 +106,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 5.0
 step = 0.1
-value = 5.0
+value = 1.0
 script = ExtResource("4_h25c5")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="menuBG"]
@@ -125,19 +127,19 @@ theme_override_constants/separation = 100
 [node name="backButton" type="Button" parent="menuBG/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Main Menu"
+text = " Main Menu "
 script = ExtResource("4_wtkbl")
 
 [node name="saveButton" type="Button" parent="menuBG/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Save"
+text = " Save "
 script = ExtResource("4_wtkbl")
 
 [node name="defaultsButton" type="Button" parent="menuBG/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Defaults"
+text = " Defaults "
 script = ExtResource("4_wtkbl")
 
 [node name="testNoise" type="AudioStreamPlayer" parent="."]

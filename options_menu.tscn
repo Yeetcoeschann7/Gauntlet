@@ -142,13 +142,11 @@ horizontal_alignment = 2
 
 [node name="screenDropdown" type="OptionButton" parent="menuBG/menuContainer"]
 layout_mode = 2
-selected = 0
-item_count = 3
+allow_reselect = true
+item_count = 2
 popup/item_0/text = "Maximized"
-popup/item_1/text = "Exlusive Fullscreen"
+popup/item_1/text = "Fullscreen"
 popup/item_1/id = 1
-popup/item_2/text = "Fullscreen"
-popup/item_2/id = 2
 script = ExtResource("5_uvtem")
 
 [node name="shadowLabel" type="Label" parent="menuBG/menuContainer"]
@@ -158,6 +156,18 @@ text = "Shadows:"
 horizontal_alignment = 2
 
 [node name="shadowBox" type="CheckBox" parent="menuBG/menuContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+button_pressed = true
+script = ExtResource("5_n0tcp")
+
+[node name="AALabel" type="Label" parent="menuBG/menuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Anti-aliasing:"
+horizontal_alignment = 2
+
+[node name="AABox" type="CheckBox" parent="menuBG/menuContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 button_pressed = true
@@ -181,19 +191,19 @@ theme_override_constants/separation = 100
 [node name="backButton" type="Button" parent="menuBG/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Main Menu"
+text = " Main Menu "
 script = ExtResource("4_st5sf")
 
 [node name="saveButton" type="Button" parent="menuBG/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Save"
+text = " Save "
 script = ExtResource("4_st5sf")
 
 [node name="defaultsButton" type="Button" parent="menuBG/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Defaults"
+text = " Defaults "
 script = ExtResource("4_st5sf")
 
 [node name="previewLabel" type="Label" parent="menuBG"]
@@ -226,6 +236,7 @@ render_target_update_mode = 4
 [connection signal="value_changed" from="menuBG/menuContainer/saturationSlider" to="." method="_on_saturation_slider_value_changed"]
 [connection signal="item_selected" from="menuBG/menuContainer/screenDropdown" to="." method="_on_screen_dropdown_item_selected"]
 [connection signal="toggled" from="menuBG/menuContainer/shadowBox" to="." method="_on_shadow_box_toggled"]
+[connection signal="toggled" from="menuBG/menuContainer/AABox" to="." method="_on_aa_box_toggled"]
 [connection signal="pressed" from="menuBG/HBoxContainer/backButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="menuBG/HBoxContainer/saveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="menuBG/HBoxContainer/defaultsButton" to="." method="_on_defaults_button_pressed"]

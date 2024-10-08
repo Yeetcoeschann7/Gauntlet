@@ -22,6 +22,10 @@ func _ready():
 	$player/Camera3D.environment.set_adjustment_contrast(globs.contrastScale)
 	$player/Camera3D.environment.set_adjustment_saturation(globs.saturationScale)
 	$DirectionalLight3D.shadow_enabled = globs.shadows
+	if globs.AA:
+		get_viewport().msaa_3d = Viewport.MSAA_2X
+	else:
+		get_viewport().msaa_3d = Viewport.MSAA_DISABLED
 	DisplayServer.window_set_mode(globs.screenMode)
 	randomize()
 	var current_pos = Vector2(0,0)

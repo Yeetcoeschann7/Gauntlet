@@ -13,9 +13,10 @@ var contrastScale = 1.1
 var saturationScale = 1.1
 var shadows = true
 var screenMode = DisplayServer.WINDOW_MODE_MAXIMIZED
-var masterVol = 1
-var musicVol = 1
-var sfxVol = 1
+var masterVol = 1.0
+var musicVol = 1.0
+var sfxVol = 1.0
+var AA = 1
 
 @onready var select_noise = AudioStreamPlayer.new()
 @onready var click_noise = AudioStreamPlayer.new()
@@ -40,7 +41,9 @@ func save():
 		"screenMode" : screenMode,
 		"masterVol" : masterVol,
 		"musicVol" : musicVol,
-		"sfxVol" : sfxVol
+		"sfxVol" : sfxVol,
+		"resScale" : resScale,
+		"AA" : AA
 		}
 	var json_string = JSON.stringify(save_dict)
 	save_file.store_line(json_string)
@@ -53,6 +56,7 @@ func loadSave():
 	while save_file.get_position() < save_file.get_length():
 		json_string += save_file.get_line()
 	var save_dict = JSON.parse_string(json_string)
+	resScale = save_dict["resScale"]
 	highscore = save_dict["highscore"]
 	brightScale = save_dict["brightness"]
 	contrastScale = save_dict["contrast"]
@@ -62,6 +66,7 @@ func loadSave():
 	masterVol = save_dict["masterVol"]
 	musicVol = save_dict["musicVol"]
 	sfxVol = save_dict["sfxVol"]
+	AA = save_dict["AA"]
 	DisplayServer.window_set_mode(screenMode)
 	
 func button_focus_moved():
@@ -75,3 +80,11 @@ func _input(event) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	if event is InputEventMouseMotion:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if Input.is_action_just_pressed("fullscreen"):
+		toggle_fullscreen()
+		
+func toggle_fullscreen():
+	if int(DisplayServer.window_get_mode()) == 3:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
